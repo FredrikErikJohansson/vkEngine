@@ -29,7 +29,7 @@ public:
 	};
 
 private:
-	VkDebugUtilsMessengerEXT debugMessenger = {};
+	VkDebugUtilsMessengerEXT debugMessenger;
 	
 	static VKAPI_ATTR VkBool32 VKAPI_CALL debugCallback(
 		VkDebugUtilsMessageSeverityFlagBitsEXT messageSeverity,

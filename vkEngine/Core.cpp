@@ -2,6 +2,7 @@
 
 void Core::run()
 {
+	window.init();
 	initVulkan();
 	mainLoop();
 	cleanup();
@@ -14,6 +15,7 @@ void Core::initVulkan()
 	window.createSurface(instance);
 	device.pickPhysicalDevice(instance, window.getSurface());
 	device.createLogicalDevice(validation.layers, window.getSurface());
+	device.createSwapChain(window);
 }
 
 void Core::mainLoop()
@@ -29,6 +31,9 @@ void Core::cleanup()
 	validation.destroy(instance);
 	window.destroySurface(instance);
 	vkDestroyInstance(instance, nullptr);
+
+	glfwDestroyWindow(window.getWindow());
+	glfwTerminate();
 }
 
 void Core::createInstance()
@@ -39,9 +44,9 @@ void Core::createInstance()
 
 	VkApplicationInfo appInfo = {};
 	appInfo.sType = VK_STRUCTURE_TYPE_APPLICATION_INFO;
-	appInfo.pApplicationName = "vkEnginer";
+	appInfo.pApplicationName = "Hello Triangle";
 	appInfo.applicationVersion = VK_MAKE_VERSION(1, 0, 0);
-	appInfo.pEngineName = nullptr;
+	appInfo.pEngineName = "No Engine";
 	appInfo.engineVersion = VK_MAKE_VERSION(1, 0, 0);
 	appInfo.apiVersion = VK_API_VERSION_1_0;
 
@@ -49,15 +54,9 @@ void Core::createInstance()
 	createInfo.sType = VK_STRUCTURE_TYPE_INSTANCE_CREATE_INFO;
 	createInfo.pApplicationInfo = &appInfo;
 
-	if (enableValidationLayers) {
-		createInfo.enabledLayerCount = static_cast<uint32_t>(validation.layers.size());
-		createInfo.ppEnabledLayerNames = validation.layers.data();
-	}
-	else {
-		createInfo.enabledLayerCount = 0;
-	}
-
 	uint32_t glfwExtensionCount = 0;
+	const char** glfwExtensions;
+
 	auto extensions = validation.getRequiredExtensions();
 	createInfo.enabledExtensionCount = static_cast<uint32_t>(extensions.size());
 	createInfo.ppEnabledExtensionNames = extensions.data();
@@ -72,6 +71,7 @@ void Core::createInstance()
 	}
 	else {
 		createInfo.enabledLayerCount = 0;
+
 		createInfo.pNext = nullptr;
 	}
 

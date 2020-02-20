@@ -1,19 +1,12 @@
 #include "Window.h"
 
-Window::Window()
-	: surface{}
+void Window::init()
 {
 	glfwInit();
 	glfwWindowHint(GLFW_CLIENT_API, GLFW_NO_API);
 	glfwWindowHint(GLFW_RESIZABLE, GLFW_FALSE);
 
 	window = glfwCreateWindow(WIDTH, HEIGHT, "vkEngine", nullptr, nullptr);
-}
-
-Window::~Window()
-{
-	glfwDestroyWindow(window);
-	glfwTerminate();
 }
 
 void Window::destroySurface(VkInstance& instance)
@@ -36,4 +29,14 @@ GLFWwindow* Window::getWindow() const
 VkSurfaceKHR Window::getSurface() const
 {
 	return surface;
+}
+
+const int Window::getWidth() const
+{
+	return WIDTH;
+}
+
+const int Window::getHeight() const
+{
+	return HEIGHT;
 }
