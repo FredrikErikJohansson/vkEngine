@@ -13,6 +13,8 @@ void Core::initVulkan()
 {
 	createInstance();
 	setupDebugMessenger();
+	device.pickPhysicalDevice(instance);
+	device.createLogicalDevice(validationLayers);
 }
 
 void Core::mainLoop()
@@ -24,6 +26,7 @@ void Core::mainLoop()
 
 void Core::cleanup()
 {
+	device.destroy();
 
 	if (enableValidationLayers) {
 		DestroyDebugUtilsMessengerEXT(instance, debugMessenger, nullptr);

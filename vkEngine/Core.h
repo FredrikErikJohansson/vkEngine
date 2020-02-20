@@ -8,7 +8,6 @@
 #include <stdexcept>
 #include <vector>
 #include <iostream>
-#include <optional>
 
 #include "Window.h"
 #include "Device.h"
