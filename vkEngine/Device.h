@@ -24,8 +24,8 @@ public:
 
 private:
 	VkPhysicalDevice physicalDevice = VK_NULL_HANDLE;
-	VkDevice device;
-	VkQueue graphicsQueue;
+	VkDevice device = {};
+	VkQueue graphicsQueue = {};
 
 	bool isDeviceSuitable(VkPhysicalDevice device);
 	QueueFamilyIndices findQueueFamilies(VkPhysicalDevice device);

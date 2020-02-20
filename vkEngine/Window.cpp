@@ -17,7 +17,7 @@ Window::~Window()
 }
 
 
-GLFWwindow* Window::getWindow()
+GLFWwindow* Window::getWindow() const
 {
 	return window;
 }

@@ -9,7 +9,7 @@ public:
 	Window();
 	~Window();
 
-	GLFWwindow* getWindow();
+	GLFWwindow* getWindow() const;
 
 private:
 	GLFWwindow* window;
