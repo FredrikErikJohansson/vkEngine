@@ -11,8 +11,9 @@ void Core::initVulkan()
 {
 	createInstance();
 	validation.setupDebugMessenger(instance);
-	device.pickPhysicalDevice(instance);
-	device.createLogicalDevice(validation.layers);
+	window.createSurface(instance);
+	device.pickPhysicalDevice(instance, window.getSurface());
+	device.createLogicalDevice(validation.layers, window.getSurface());
 }
 
 void Core::mainLoop()
@@ -26,7 +27,7 @@ void Core::cleanup()
 {
 	device.destroy();
 	validation.destroy(instance);
-
+	window.destroySurface(instance);
 	vkDestroyInstance(instance, nullptr);
 }
 
@@ -78,3 +79,4 @@ void Core::createInstance()
 		throw std::runtime_error("failed to create instance!");
 	}
 }
+
