@@ -12,6 +12,7 @@
 #include "Window.h"
 #include "Device.h"
 #include "Validation.h"
+#include "Pipeline.h"
 
 class Core
 {
@@ -23,6 +24,7 @@ private:
 	Validation validation;
 	Window window;
 	Device device;
+	Pipeline pipeline;
 
 	void initVulkan();
 	void mainLoop();

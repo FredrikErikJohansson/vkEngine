@@ -16,6 +16,8 @@ void Core::initVulkan()
 	device.pickPhysicalDevice(instance, window.getSurface());
 	device.createLogicalDevice(validation.layers, window.getSurface());
 	device.createSwapChain(window);
+	device.createImageViews();
+	pipeline.createGraphicsPipeline(device.getDevice(), device.getSwapChainExtent());
 }
 
 void Core::mainLoop()
@@ -27,6 +29,7 @@ void Core::mainLoop()
 
 void Core::cleanup()
 {
+	pipeline.destroy(device.getDevice());
 	device.destroy();
 	validation.destroy(instance);
 	window.destroySurface(instance);

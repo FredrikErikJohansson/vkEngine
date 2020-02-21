@@ -35,6 +35,10 @@ public:
 	void pickPhysicalDevice(VkInstance& instance, const VkSurfaceKHR& surface);
 	void createLogicalDevice(const std::vector<const char*>& validationLayers, const VkSurfaceKHR& surface);
 	void createSwapChain(Window window);
+	void createImageViews();
+
+	VkDevice getDevice() const;
+	VkExtent2D getSwapChainExtent() const;
 
 private:
 	VkPhysicalDevice physicalDevice = VK_NULL_HANDLE;
@@ -45,6 +49,7 @@ private:
 	std::vector<VkImage> swapChainImages;
 	VkFormat swapChainImageFormat;
 	VkExtent2D swapChainExtent;
+	std::vector<VkImageView> swapChainImageViews;
 
 	const std::vector<const char*> deviceExtensions = {
 		VK_KHR_SWAPCHAIN_EXTENSION_NAME
