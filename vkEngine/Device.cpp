@@ -161,6 +161,11 @@ VkExtent2D Device::getSwapChainExtent() const
 	return swapChainExtent;
 }
 
+VkFormat Device::getSwapChainImageFormat() const
+{
+	return swapChainImageFormat;
+}
+
 bool Device::isDeviceSuitable(VkPhysicalDevice device, VkSurfaceKHR surface)
 {
 	QueueFamilyIndices indices = findQueueFamilies(device, surface);

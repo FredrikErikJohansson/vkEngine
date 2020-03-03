@@ -17,6 +17,7 @@ void Core::initVulkan()
 	device.createLogicalDevice(validation.layers, window.getSurface());
 	device.createSwapChain(window);
 	device.createImageViews();
+	pipeline.createRenderPass(device.getDevice(), device.getSwapChainImageFormat());
 	pipeline.createGraphicsPipeline(device.getDevice(), device.getSwapChainExtent());
 }
 

@@ -39,6 +39,7 @@ public:
 
 	VkDevice getDevice() const;
 	VkExtent2D getSwapChainExtent() const;
+	VkFormat getSwapChainImageFormat() const;
 
 private:
 	VkPhysicalDevice physicalDevice = VK_NULL_HANDLE;
