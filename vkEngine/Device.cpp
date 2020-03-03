@@ -151,6 +151,11 @@ void Device::createImageViews()
 	}
 }
 
+VkPhysicalDevice Device::getPhysicalDevice() const
+{
+	return physicalDevice;
+}
+
 VkDevice Device::getDevice() const
 {
 	return device;
@@ -164,6 +169,26 @@ VkExtent2D Device::getSwapChainExtent() const
 VkFormat Device::getSwapChainImageFormat() const
 {
 	return swapChainImageFormat;
+}
+
+std::vector<VkImageView> Device::getSwapChainImageViews() const
+{
+	return swapChainImageViews;
+}
+
+VkSwapchainKHR Device::getSwapChain() const
+{
+	return swapChain;
+}
+
+VkQueue Device::getGraphicsQueue() const
+{
+	return graphicsQueue;
+}
+
+VkQueue Device::getPresentQueue() const
+{
+	return presentQueue;
 }
 
 bool Device::isDeviceSuitable(VkPhysicalDevice device, VkSurfaceKHR surface)
@@ -198,7 +223,7 @@ bool Device::checkDeviceExtensionSupport(VkPhysicalDevice device)
 	return requiredExtensions.empty();
 }
 
-QueueFamilyIndices Device::findQueueFamilies(VkPhysicalDevice device, VkSurfaceKHR surface)
+QueueFamilyIndices Device::findQueueFamilies(VkPhysicalDevice device, VkSurfaceKHR surface) const
 {
 	QueueFamilyIndices indices;
 

@@ -11,15 +11,7 @@
 #include <algorithm>
 
 #include "Window.h"
-
-struct QueueFamilyIndices {
-	std::optional<uint32_t> graphicsFamily;
-	std::optional<uint32_t> presentFamily;
-
-	bool isComplete() {
-		return graphicsFamily.has_value() && presentFamily.has_value();
-	}
-};
+#include "Utils.h"
 
 struct SwapChainSupportDetails {
 	VkSurfaceCapabilitiesKHR capabilities = {};
@@ -37,9 +29,16 @@ public:
 	void createSwapChain(Window window);
 	void createImageViews();
 
+	QueueFamilyIndices findQueueFamilies(VkPhysicalDevice device, VkSurfaceKHR surface) const;
+
+	VkPhysicalDevice getPhysicalDevice() const;
 	VkDevice getDevice() const;
 	VkExtent2D getSwapChainExtent() const;
 	VkFormat getSwapChainImageFormat() const;
+	std::vector<VkImageView> getSwapChainImageViews() const;
+	VkSwapchainKHR getSwapChain() const;
+	VkQueue getGraphicsQueue() const;
+	VkQueue getPresentQueue() const;
 
 private:
 	VkPhysicalDevice physicalDevice = VK_NULL_HANDLE;
@@ -58,7 +57,6 @@ private:
 
 	bool isDeviceSuitable(VkPhysicalDevice device, VkSurfaceKHR surface);
 	bool checkDeviceExtensionSupport(VkPhysicalDevice device);
-	QueueFamilyIndices findQueueFamilies(VkPhysicalDevice device, VkSurfaceKHR surface);
 	SwapChainSupportDetails querySwapChainSupport(VkPhysicalDevice device, VkSurfaceKHR surface);
 	VkSurfaceFormatKHR chooseSwapSurfaceFormat(const std::vector<VkSurfaceFormatKHR>& availableFormats);
 	VkPresentModeKHR chooseSwapPresentMode(const std::vector<VkPresentModeKHR>& availablePresentModes);

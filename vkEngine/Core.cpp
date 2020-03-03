@@ -19,13 +19,20 @@ void Core::initVulkan()
 	device.createImageViews();
 	pipeline.createRenderPass(device.getDevice(), device.getSwapChainImageFormat());
 	pipeline.createGraphicsPipeline(device.getDevice(), device.getSwapChainExtent());
+	pipeline.createFramebuffers(device.getDevice(), device.getSwapChainExtent(), device.getSwapChainImageViews());
+	pipeline.createCommandPool(device, window.getSurface());
+	pipeline.createCommandBuffers(device.getDevice(), device.getSwapChainExtent());
+	pipeline.createSemaphores(device.getDevice());
 }
 
 void Core::mainLoop()
 {
 	while (!glfwWindowShouldClose(window.getWindow())) {
 		glfwPollEvents();
+		pipeline.drawFrame(device.getDevice(), device.getGraphicsQueue(), device.getPresentQueue(), device.getSwapChain());
 	}
+
+	vkDeviceWaitIdle(device.getDevice());
 }
 
 void Core::cleanup()

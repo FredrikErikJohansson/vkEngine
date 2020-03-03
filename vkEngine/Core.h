@@ -28,6 +28,7 @@ private:
 
 	void initVulkan();
 	void mainLoop();
+	void drawFrame(const VkDevice& device, const VkSwapchainKHR& swapChain, VkSemaphore& imageAvailableSemaphore);
 	void cleanup();
 
 	void createInstance();

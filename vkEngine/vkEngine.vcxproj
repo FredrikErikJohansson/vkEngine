@@ -150,6 +150,7 @@
     <ClInclude Include="Core.h" />
     <ClInclude Include="Device.h" />
     <ClInclude Include="Pipeline.h" />
+    <ClInclude Include="Utils.h" />
     <ClInclude Include="Validation.h" />
     <ClInclude Include="Window.h" />
   </ItemGroup>
